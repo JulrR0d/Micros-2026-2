@@ -1,20 +1,30 @@
-from machine import DAC, Pin, ADC, PWM
-vRef = ADC(Pin(4))# Potenciometro 1 - ADC 2
-carga = ADC(Pin(34)) # Potenciometro 2 - ADC 1
-start = Pin(22, Pin.IN, Pin.PULL_UP) # Boton 1
-precencia = Pin(23, Pin.IN, Pin.PULL_HOLD) # Boton 2
-run = Pin(21, Pin.OUT) # LED verde
-sobrecarga = Pin(15, Pin.OUT)# LED rojo
-#DAC
-#PWM
+from machine import Pin
+from time import sleep
+start = Pin(18, Pin.IN, Pin.PULL_UP)
+boton = Pin(22, Pin.IN, Pin.PULL_UP)
+led = Pin(23, Pin.OUT)
 
-def inicio(Pin):
-    run.value(not run.value())
-    while (True):
+maquina_encendida = False
 
+while True:
 
+    # START: cambia entre encendido y apagado
+    if start.value() == 0:
+        maquina_encendida = not maquina_encendida
 
-start.irq(
-    trigger=Pin.IRQ_FALLING,
-    handler=inicio
-)
+        if maquina_encendida:
+            print("Máquina encendida")
+        else:
+            print("Máquina apagada")
+            led.value(0)
+
+        sleep(0.3)   # evita múltiples cambios por una pulsación
+
+    # BOTÓN: solo funciona si la máquina está encendida
+    if maquina_encendida and boton.value() == 0:
+        print("Avanza")
+        led.value(1)
+    else:
+        led.value(0)
+
+    sleep(0.1)
