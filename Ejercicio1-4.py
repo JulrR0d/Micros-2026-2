@@ -30,7 +30,7 @@ while True:
         vref = ((float(velocidad.read()))/4095)*2
         carga = ((float(masa.read()))/4095)*100
         if carga<=95:
-            print(f"Avanza;\tVelocidad: {vref} m/s;\tCarga: {carga} Kg")
+            print(f"Avanza;\tVelocidad: {vref:.2f} m/s;\tCarga: {carga:.2f} Kg")
             led_run.value(1)
             if carga>80:
                 led_alarma.value(1)
@@ -38,7 +38,7 @@ while True:
                 led_alarma.value(0)
         else:
             vref = 0.0
-            print(f"Avanza;\tVelocidad: {vref} m/s;\tCarga: {carga} Kg")
+            print(f"Avanza;\tVelocidad: {vref:.2f} m/s;\tCarga: {carga:.2f} Kg")
             led_run.value(0)
             led_alarma.value(1)
     else:
