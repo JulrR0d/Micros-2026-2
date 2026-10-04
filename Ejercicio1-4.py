@@ -8,7 +8,7 @@ start = Pin(18, Pin.IN, Pin.PULL_UP)        # Boton         | GPIO 18
 presencia = Pin(22, Pin.IN, Pin.PULL_UP)    # Boton         | GPIO 22
 
 led_run = Pin(23, Pin.OUT)                  # LED           | GPIO 23
-led_alarma = Pin(27, Pin.OUT)               # LED           | GPIO 34
+led_alarma = Pin(27, Pin.OUT)               # LED           | GPIO 27
 
 motor = PWM(Pin(5), freq=1000, duty=0)      # PWM           
 dac = DAC(Pin(26))                          # DAC
